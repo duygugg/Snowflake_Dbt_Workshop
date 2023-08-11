@@ -14,15 +14,15 @@ renamed as (
         shift_id as shift_key,
         shift_start_time,
         shift_end_time,
-        o_orderstatus as status_code,
         order_amount,
         order_discount_amount,
         DATE_TRUNC('day', order_ts) AS order_date_in_day,
         order_ts as order_date,
         order_total,
-        order_currency as currency,
-        
-        
+        order_currency as currency
+            
     from source
 
 )
+
+select * from renamed
