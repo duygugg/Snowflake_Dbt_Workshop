@@ -1,0 +1,26 @@
+version: 2
+sources:
+  - name: tastybytes
+    description: source tastybytes data
+    database: FROSTBYTE_TASTY_BYTES
+    schema: raw_pos
+    tables:
+      - name: order_header
+        description: main order tracking table
+        
+        columns:
+          - name: order_id
+            description: SF*1,500,000 are sparsely populated
+            tests: 
+              - unique
+              - not_null
+
+      - name: order_detail
+        description: main lineitem table
+        columns:
+          - name: ORDER_ID
+            description: Foreign Key to ORDER_HEADER'S ORDER_ID 
+            tests:
+              - relationships:
+                  to: source('tastybytes', 'order_header')
+                  field: order_id

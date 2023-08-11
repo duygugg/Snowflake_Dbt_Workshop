@@ -34,5 +34,9 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   my_new_project:
     # Applies to all files under models/example/
-    example:
+    staging:
       materialized: view
+      snowflake_warehouse: tasty_dev_wh
+    marts:
+      materialized: table
+      snowflake_warehouse: tasty_de_wh
