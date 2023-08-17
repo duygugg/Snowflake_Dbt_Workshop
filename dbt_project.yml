@@ -36,9 +36,19 @@ models:
     # Applies to all files under models/example/
     staging:
       tastybytes:
+        order:
+          +schema: ORDER   
+        product:
+          +schema: PRODUCT
+        database: STAGING
         materialized: view
         snowflake_warehouse: tasty_dev_wh
-    marts:
-      core:
-        materialized: table
-        snowflake_warehouse: tasty_de_wh
+    mart:
+      dwh:
+        database: DWH
+        order:
+          +schema: ORDER   
+        product:
+          +schema: PRODUCT
+      materialized: table
+      snowflake_warehouse: tasty_de_wh
