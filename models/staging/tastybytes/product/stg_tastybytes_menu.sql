@@ -16,7 +16,7 @@ with source as (
         m.menu_item_id as menu_item_key,
         m.menu_type_id as menu_type_key,
         m.menu_type as menu_type_name,
-        m.truck_brand_name as concept,
+        m.truck_brand_name,
         m.menu_item_name,
         m.item_category,
         m.item_subcategory,

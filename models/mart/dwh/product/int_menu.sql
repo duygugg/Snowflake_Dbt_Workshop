@@ -10,7 +10,7 @@ with menu as (
 
 , truck as(
 
-    select * from {{source("tastybytes","truck")}}
+    select * from {{ref("stg_tastybytes_truck")}}
 
 )
 

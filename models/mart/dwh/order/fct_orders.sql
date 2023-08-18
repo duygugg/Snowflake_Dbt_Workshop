@@ -33,11 +33,10 @@ final as (
     select 
 
         orders.order_key, 
-        orders.order_date,
         orders.customer_key,
         orders.truck_key,
-        orders.shift_duration,
-        1 as order_count,  
+        1 as order_count, 
+        orders.order_date, 
         orders.currency,              
         order_item_summary.order_total_price,
         order_item_summary.order_total_quantity,

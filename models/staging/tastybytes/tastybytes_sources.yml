@@ -1,6 +1,12 @@
 version: 2
 sources:
   - name: tastybytes
+    database: FROSTBYTE_TASTY_BYTES
+    schema: raw_customer
+    tables:
+      - name: customer
+      
+  - name: tastybytes
     description: source tastybytes data
     database: FROSTBYTE_TASTY_BYTES
     schema: raw_pos
@@ -54,7 +60,9 @@ sources:
           - name: MENU_TYPE_ID
             description: Unique identifier for each food truck's menu's type/ concept, enabling easy categorization and access to menu-related details.
             tests:
-              - not_null
+              - not_null    
+            
+
         
                   
               
