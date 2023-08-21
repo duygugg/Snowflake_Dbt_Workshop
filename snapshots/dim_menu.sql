@@ -34,7 +34,7 @@ select
         else 1
     end as version
 from
-    {{ref('int_menu')}}
+    {{ref('int_menu_joined_with_truck')}}
 
 {% endsnapshot %}
 
