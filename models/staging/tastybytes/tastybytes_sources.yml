@@ -4,7 +4,9 @@ sources:
     database: FROSTBYTE_TASTY_BYTES
     schema: raw_customer
     tables:
-      - name: customer
+      - name: customer_loyalty
+        description: main customer table
+
       
   - name: tastybytes
     description: source tastybytes data

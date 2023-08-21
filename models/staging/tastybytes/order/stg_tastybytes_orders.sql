@@ -32,4 +32,5 @@ select * from renamed
 
 --{{ target.schema }}
 --{{ schema }}
+--{{ this.table }}
 --{{this.schema}}
