@@ -40,7 +40,7 @@ models:
     staging:
       tastybytes:
         database: STAGING
-        materialized: view
+        materialized: table
         snowflake_warehouse: tasty_dev_wh
     mart:
       dwh:

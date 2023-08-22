@@ -13,7 +13,7 @@
             {{ strategy.unique_key }} as dbt_unique_key
 
         from {{ target_relation }}
-        where dbt_valid_to = timestamp('9999-12-31 00:00:00')
+        where dbt_valid_to = '9999-12-31 00:00:00'::timestamp
 
     ),
 
@@ -22,9 +22,9 @@
         select
             *,
             {{ strategy.unique_key }} as dbt_unique_key,
-            cast(DATETIME_ADD(CURRENT_DATETIME('Europe/Istanbul'), INTERVAL 1 DAY) as timestamp)as dbt_updated_at,
+            current_timestamp() as dbt_updated_at,
             current_timestamp() as dbt_valid_from,
-            nullif(timestamp('9999-12-31 00:00:00'),current_timestamp()) as dbt_valid_to,
+            nullif('9999-12-31 00:00:00'::timestamp,current_timestamp()) as dbt_valid_to,
             {{ strategy.scd_id }} as dbt_scd_id
 
         from snapshot_query
@@ -35,7 +35,7 @@
         select
             *,
             {{ strategy.unique_key }} as dbt_unique_key,
-            cast(cast(DATETIME_ADD(CURRENT_DATETIME('Europe/Istanbul'), INTERVAL 1 DAY) as timestamp)as timestamp)as dbt_updated_at,
+            current_timestamp() as dbt_updated_at,
             current_timestamp() as dbt_valid_from,
             current_timestamp() as dbt_valid_to
 

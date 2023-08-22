@@ -9,6 +9,4 @@
         {% else %}
             1
         {% endif %}
-
-
 {% endmacro %}

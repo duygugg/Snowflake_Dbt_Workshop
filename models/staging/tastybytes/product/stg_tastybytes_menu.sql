@@ -1,7 +1,6 @@
 {{
     config(
-        materialized = "table",
-        schema = "PRODUCT"
+        materialized = "table"
     )
 }}
 with source as (
