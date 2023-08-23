@@ -9,8 +9,12 @@ config-version: 2
 # This setting configures which "profile" dbt uses for this project.
 profile: 'default'
 
+
+
 vars:
   schema_name: "ORDERS"
+  dbt_artifacts_database: "NULL"
+  dbt_artifacts_schema: "TASTYBYTES"
 
 # These configurations specify where dbt should look for different types of files.
 # The `source-paths` config, for example, states that models in this project can be
@@ -27,6 +31,10 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
+on-run-start:
+    - "create table if not exists TESTS.DEMO.audit_dbt_results (invocation_id text, run_started_at timestamp, time timestamp,unique_id text, status text, error text , skip text, failed text,execution_time decimal(10,2))"
+on-run-end:
+    - "insert into  TESTS.DEMO.audit_dbt_results (invocation_id, run_started_at, time, unique_id, status, error, skip, failed, execution_time ) values {{ unpack_results(results) }}"
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
@@ -37,9 +45,13 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   my_new_project:
     # Applies to all files under models/example/
+    elementary:
+      +database: TESTS # optional, default is your target database
+      +schema: TASTYBYTES
     staging:
       tastybytes:
         database: STAGING
+        +enabled: true
         materialized: table
         snowflake_warehouse: tasty_dev_wh
     mart:

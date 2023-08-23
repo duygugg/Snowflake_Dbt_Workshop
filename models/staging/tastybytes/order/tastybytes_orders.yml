@@ -1,0 +1,19 @@
+version: 2
+
+sources:
+  - name: tastybytes_customer
+    database: STAGING
+    schema: ORDERS
+    tables:
+      - name: stg_tastybytes_orderdetails
+        description: "STAGING TABLE FOR ORDER DETAILS TABLE"
+        columns:
+          - name: order_key
+            description: "Unique  key for this table"
+            tests:
+              - unique:
+                  config:
+                    store_failures: true 
+              - not_null:
+                  config:
+                    store_failures: true 
