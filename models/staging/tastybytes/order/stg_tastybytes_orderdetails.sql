@@ -3,10 +3,11 @@
         materialized = "table",
         target_database = "STAGING",
         target_schema = "ORDER",
-        pre_hook = "{{unload_failed_rows(this,'order_key',this.table)}}",
+        pre_hook = "{{unload_failed_rows(this,'order_key',this.name)}}",
         post_hook = "delete from {{ this }} where order_key  in ( select  order_key from {{ this }}  group by order_key HAVING COUNT(*) > 1)"
     )
 }}
+
 with source as (
 
     select * from {{ source('tastybytes', 'order_detail_test') }}
@@ -31,3 +32,7 @@ renamed as (
 )
 
 select * from renamed
+
+--{{this.name}}
+--{{this.schema}}
+--{{this.database}}
