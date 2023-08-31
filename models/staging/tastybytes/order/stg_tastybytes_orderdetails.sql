@@ -3,8 +3,8 @@
         materialized = "table",
         target_database = "STAGING",
         target_schema = "ORDER",
-        pre_hook = "{{unload_failed_rows(this,'order_key',this.name)}}",
-        post_hook = "delete from {{ this }} where order_key  in ( select  order_key from {{ this }}  group by order_key HAVING COUNT(*) > 1)"
+        pre_hook = "{{load_failed_rows(this,this.name)}}",
+        post_hook = "{{deletle_rows_failed_test(this,this.name,'order_key')}}"
     )
 }}
 

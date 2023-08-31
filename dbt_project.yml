@@ -31,11 +31,6 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
-on-run-start:
-    - "create table if not exists TESTS.DEMO.audit_dbt_results (invocation_id text, run_started_at timestamp, time timestamp,unique_id text, status text, error text , skip text, failed text,execution_time decimal(10,2))"
-on-run-end:
-    - "insert into  TESTS.DEMO.audit_dbt_results (invocation_id, run_started_at, time, unique_id, status, error, skip, failed, execution_time ) values {{ unpack_results(results) }}"
-
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 

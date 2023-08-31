@@ -8,10 +8,10 @@
     {{log("table_exists?" ~ table_exists)}}
         {% if not table_exists %}
             {{log("table_exists not eixsts YALL!!")}}
-            0
+            {{return(0)}}
         {% else %}
             {{log("table_exists YALL!!")}}
-            1
+            {{return(1)}}
         {% endif %}
 
 {% endmacro %}

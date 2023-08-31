@@ -11,9 +11,6 @@ sources:
           - name: order_key
             description: "Unique  key for this table"
             tests:
-              - unique:
-                  config:
-                    store_failures: true 
-              - not_null:
-                  config:
-                    store_failures: true 
+              - unique
+              - not_null
+
