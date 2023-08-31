@@ -1,11 +1,18 @@
 version: 2
 sources:
+  - name: tastybytes_customer
+    database: FROSTBYTE_TASTY_BYTES
+    schema: raw_customer
+    tables:
+      - name: customer_loyalty
+        description: main customer table
+
   - name: tastybytes
     description: source tastybytes data
     database: FROSTBYTE_TASTY_BYTES
     schema: raw_pos
     tables:
-      - name: order_header
+      - name: order_header_test
         description: main order tracking table
         
         columns:
@@ -14,13 +21,51 @@ sources:
             tests: 
               - unique
               - not_null
+                  
 
-      - name: order_detail
+
+      - name: order_detail_test
         description: main lineitem table
         columns:
           - name: ORDER_ID
             description: Foreign Key to ORDER_HEADER'S ORDER_ID 
             tests:
               - relationships:
-                  to: source('tastybytes', 'order_header')
+                  to: source('tastybytes', 'order_header_test')
                   field: order_id
+        
+      - name: menu
+        description: Captures food truck menus and their menu items within the Tastybytes network. Each row represents a unique menu associated with a food truck, including menu item details such as names and ingredients.
+        columns:
+          - name: MENU_ITEM_ID
+            description: Foreign key to Menu_item_id in Order_Detail table. An Unique identifier for individual menu item of item-specific information.
+            tests:
+              - relationships:
+                  field: menu_item_id
+                  to: source('tastybytes','order_detail_test')
+              - not_null
+          - name: MENU_ID
+            description: Unique identifier for each food truck's menu, enabling easy categorization and access to menu-related details.
+            tests:
+              - not_null
+              - unique
+      - name: truck
+        description: Stores information about individual food trucks in the Tastybytes network. Each row represents a distinct truck, containing details such as truck name, type, and location.
+        columns:
+          - name: TRUCK_ID
+            description: Foreign key to truck_id in Orders table. 
+            tests:
+              - relationships:
+                  field: truck_id
+                  to: source('tastybytes','order_header_test')
+              - not_null
+              - unique
+          - name: MENU_TYPE_ID
+            description: Unique identifier for each food truck's menu's type/ concept, enabling easy categorization and access to menu-related details.
+            tests:
+              - not_null    
+            
+
+        
+                  
+              
