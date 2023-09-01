@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+  - name: tastybytes_customer
+    database: DWH
+    schema: CUSTOMER
+    tables: 
+    - name: dim_customer
+      description: Dimension table for the customer object.
+      tags: ['dim_customer_test']
+      
+      tests:
+        - dbt_utils.recency:
+            datepart: day
+            field: insert_date
+            interval: 1
+
+        - is_expression_true:
+            expression: "datediff(year,birthday_date,register_date) > 19 "
+
+      columns:
+        - name: marital_status
+          tests:
+            - dbt_utils.not_accepted_values:
+                  values: ['Divorced/Separeted','Not known']
+
+        - name: phone_number
+          tags: ["phone_check"]
+          tests:
+            - dbt_expectations.expect_column_values_to_match_regex:
+                regex: \d{3}-\d{3}-\d{4}
+                is_raw: true
+            

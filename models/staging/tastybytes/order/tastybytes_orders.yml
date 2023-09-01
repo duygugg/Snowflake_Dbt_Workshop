@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: tastybytes_customer
+  - name: tastybytes_orders
     database: STAGING
     schema: ORDERS
     tables:
