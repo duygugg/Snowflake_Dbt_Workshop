@@ -21,8 +21,14 @@ sources:
             tests: 
               - unique
               - not_null
-                  
 
+          - name: truck_id
+            description: Column that specifies which food truck processed this specific order.
+            tests:
+              - relationships:
+                  field: truck_id
+                  to: source('tastybytes','truck')
+                  
 
       - name: order_detail_test
         description: main lineitem table
@@ -33,17 +39,23 @@ sources:
               - relationships:
                   to: source('tastybytes', 'order_header_test')
                   field: order_id
+
+          - name: menu_item_id
+            description: Foreign key to Menu_item_id in Menu table. An Unique identifier for individual menu item of item-specific information.
+            tests:
+              - relationships:
+                  field: menu_item_id
+                  to: source('tastybytes','menu')
+              
         
       - name: menu
         description: Captures food truck menus and their menu items within the Tastybytes network. Each row represents a unique menu associated with a food truck, including menu item details such as names and ingredients.
         columns:
           - name: MENU_ITEM_ID
-            description: Foreign key to Menu_item_id in Order_Detail table. An Unique identifier for individual menu item of item-specific information.
+            description:  An Unique identifier for individual menu item of item-specific information.
             tests:
-              - relationships:
-                  field: menu_item_id
-                  to: source('tastybytes','order_detail_test')
               - not_null
+
           - name: MENU_ID
             description: Unique identifier for each food truck's menu, enabling easy categorization and access to menu-related details.
             tests:
@@ -55,11 +67,9 @@ sources:
           - name: TRUCK_ID
             description: Foreign key to truck_id in Orders table. 
             tests:
-              - relationships:
-                  field: truck_id
-                  to: source('tastybytes','order_header_test')
               - not_null
               - unique
+
           - name: MENU_TYPE_ID
             description: Unique identifier for each food truck's menu's type/ concept, enabling easy categorization and access to menu-related details.
             tests:
