@@ -7,6 +7,7 @@ sources:
     tables:
       - name: stg_tastybytes_orderdetails
         description: "STAGING TABLE FOR ORDER DETAILS TABLE"
+        tags: ["stg_orderdetails_unique_test"]
         columns:
           - name: order_key
             description: "Unique  key for this table"

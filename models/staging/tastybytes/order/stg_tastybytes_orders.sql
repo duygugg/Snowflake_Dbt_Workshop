@@ -16,15 +16,15 @@ renamed as (
         shift_id as shift_key,
         shift_start_time,
         shift_end_time,
-        timediff(hour,shift_start_time,shift_end_time) as shift_duration,  
-        DAY( order_ts :: date) AS order_date_in_day,
         order_ts as order_date,
         served_ts as served_date,
         order_tax_amount as tax_amount,
         order_amount,
         order_discount_amount,
         order_total,
-        order_currency as currency         
+        order_currency as currency,
+        timediff(hour, shift_start_time, shift_end_time) as shift_duration,
+        day(order_ts::date) as order_date_in_day
     from source
 )
 
@@ -33,4 +33,4 @@ select * from renamed
 --{{ target.schema }}
 --{{ schema }}
 --{{ this.table }}
---{{this.schema}}
+--{{ this.schema }}

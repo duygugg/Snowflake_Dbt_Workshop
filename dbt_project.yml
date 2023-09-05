@@ -9,8 +9,6 @@ config-version: 2
 # This setting configures which "profile" dbt uses for this project.
 profile: 'default'
 
-
-
 vars:
   schema_name: "ORDERS"
   dbt_artifacts_database: "NULL"
