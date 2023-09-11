@@ -34,7 +34,7 @@ select
     t2.order_item_key,
     t1.order_key,
     t2.menu_item_key,
-    t2.discount_id as discount_key,
+    cast(t2.discount_id as integer) as discount_key,
     t2.line_number, 
     t1.customer_key,
     t2.quantity,
