@@ -8,6 +8,10 @@ sources:
     - name: dim_customer
       description: Dimension table for the customer object.
       tags: ['dim_customer_test']
+      loaded_at_field: insert_date 
+      freshness: # default freshness
+        warn_after: {count: 2, period: day}
+        error_after: {count: 7, period: day}
       
       tests:
         - dbt_utils.recency:
@@ -30,4 +34,5 @@ sources:
             - dbt_expectations.expect_column_values_to_match_regex:
                 regex: \d{3}-\d{3}-\d{4}
                 is_raw: true
+
             

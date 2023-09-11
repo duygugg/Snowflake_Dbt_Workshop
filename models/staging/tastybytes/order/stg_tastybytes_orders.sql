@@ -12,7 +12,7 @@ renamed as (
         order_id as order_key,
         customer_id as customer_key,
         truck_id as truck_key,
-        discount_id as discount_key,
+        cast(discount_id as integer) as discount_key,
         shift_id as shift_key,
         shift_start_time,
         shift_end_time,
