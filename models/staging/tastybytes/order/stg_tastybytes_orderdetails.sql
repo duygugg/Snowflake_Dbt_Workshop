@@ -33,6 +33,6 @@ renamed as (
 
 select * from renamed
 
---{{this.name}}
+--{{this}}
 --{{this.schema}}
 --{{this.database}}
